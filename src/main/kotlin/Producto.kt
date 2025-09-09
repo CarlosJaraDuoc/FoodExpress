@@ -15,12 +15,12 @@ class Comida(nombre: String, descripcion: String, precio: Double, val esPremium:
         get()= if(esPremium) precio * 1.2 else precio
 }
 
-class Bebida(nombre: String, descripcion: String, precio: Double, val categoria: String, val tamaño: String) : Producto(nombre, descripcion, precio){
+class Bebida(nombre: String, descripcion: String, precio: Double, val categoria: String, val tamanio: String) : Producto(nombre, descripcion, precio){
     // Se sobreescribe la propiedad para ajustar el precio según tamaño
     override val precioFinal: Double
         get(){
             var precioAjustado = precio
-            when (tamaño.lowercase()){
+            when (tamanio.lowercase()){
                 "mediano" -> precioAjustado += 290.0
                 "grande" -> precioAjustado += 690.0
             }

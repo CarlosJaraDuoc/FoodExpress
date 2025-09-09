@@ -5,18 +5,23 @@ object GestorPedidos{
     fun inicializarCatalogo(): List<Producto>{
         return listOf(
             Comida("Hamburgesa", "Versión Clásica", 8990.0, false),
-            Comida("Salmón Grillado (Premium)", "Origen sureño", 15990.0, true),
-            Bebida("Coca Cola (Mediano)", "En lata", 1990.0, "Gaseosa", "mediano"),
-            Bebida("Jugo Natural (Grande)", "Con fruta fresca", 2990.0, "Jugo Natural", "grande"),
+            Comida("Salmón Grillado", "Origen sureño", 15990.0, true),
+            Bebida("Coca Cola", "En lata", 1990.0, "Gaseosa", "mediano"),
+            Bebida("Jugo Natural", "Con fruta fresca", 2990.0, "Jugo Natural", "grande"),
             Bebida("Té Helado", "Sabor limón", 2100.0, "Infusión", "pequeño"),
-            Bebida("Agua Mineral", "Sin gas", 1500.0, "Jugo Natural", "grande")
+            Bebida("Agua Mineral", "Sin gas", 1500.0, "Agua", "grande")
         )
     }
 
     fun mostrarCatalogo(catalogo: List<Producto>){
         for (i in catalogo.indices){
             val producto = catalogo[i]
-            println("${i+1}. ${producto.nombre} - $${producto.precioFinal.toInt()} (${producto::class.simpleName})")
+            val detalles = when (producto) {
+                is Comida -> "(${if (producto.esPremium) "Premium" else "Normal"})"
+                is Bebida -> "${producto.categoria}, tamaño ${producto.tamanio}"
+                else -> ""
+            }
+            println("${i+1}. ${producto.nombre} - $${producto.precioFinal.toInt()} $detalles")
         }
     }
 
