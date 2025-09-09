@@ -31,7 +31,7 @@ object GestorPedidos{
         return pedido.toList()
     }
 
-    // Calcula el subtotal del pedido. Sigue usando 'sumOf' porque es muy legible.
+    // Calcula el subtotal del pedido.
     fun calcularSubtotal(pedido: List<Producto>): Double {
         return pedido.sumOf { it.precioFinal }
     }

@@ -1,7 +1,7 @@
 // Importar biblioteca coroutines para manejar tareas asíncronicas
 import kotlinx.coroutines.*
 
-// Inicializar variables relacionadas al catalogo e iva
+// Inicializar variables relacionadas al catalogo, usuario e iva
 val catalogo = GestorPedidos.inicializarCatalogo()
 val iva = 0.19
 val codigos = mutableListOf<Int>()
@@ -9,7 +9,6 @@ val correos = mutableListOf<String>()
 val nombres = mutableListOf<String>()
 val apellidos = mutableListOf<String>()
 var codigoSecuencial = 0
-val contadorCompras = mutableMapOf<Int, Int>()
 val contrasenas = mutableListOf<String>()
 
 fun generarCodigo(): Int {
@@ -126,6 +125,8 @@ fun main() = runBlocking {
                     continue
                 }
 
+
+                // validacion reglas negocio
                 val tieneComida = pedido.any { it is Comida }
                 val tieneBebida = pedido.any { it is Bebida }
                 if (!tieneComida || !tieneBebida) {
@@ -135,7 +136,7 @@ fun main() = runBlocking {
 
                 entradaValida = true
 
-            } catch (e: NumberFormatException) {
+            } catch (_: NumberFormatException) {
                 println("Error: La entrada es inválida. Asegúrate de ingresar solo números. Inténtelo de nuevo.")
             } catch (e: IllegalArgumentException) {
                 println("Error en la creación del catálogo: ${e.message}")
